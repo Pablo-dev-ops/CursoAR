@@ -12,5 +12,5 @@ public class Item : ScriptableObject
     public GameObject item3DModel;
 
 
-
+    
 }
