@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ButtonManager : MonoBehaviour
+public class ItemButtonManager : MonoBehaviour
 {
     private string itemName;
     private string itemDescription;
     private Sprite itemImage;
     private GameObject item3DModel;
-    public string ItemNamte
+    private ARInteractionManager interactionManager;
+
+    public string ItemName
     {
         set
         {
@@ -19,9 +21,9 @@ public class ButtonManager : MonoBehaviour
 
     }
 
-    public string ItemDescription {set => ItemDescription = value; }
+    public string ItemDescription { set => ItemDescription = value; }
     public Sprite ItemImage { set => ItemImage = value; }
-    public GameObject Item3DModel {  set => Item3DModel = value; }
+    public GameObject Item3DModel { set => Item3DModel = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -31,15 +33,17 @@ public class ButtonManager : MonoBehaviour
 
         var button = GetComponent<Button>();
         button.onClick.AddListener(GameManager.instance.ARPosition);
+        button.onClick.AddListener(Create3dModel);
 
+        interactionManager = FindObjectOfType<ARInteractionManager>();
     }
-     private void Create3dModel()
+    private void Create3dModel()
     {
-        Instantiate(item3DModel);///250
+        interactionManager.Item3DModel = Instantiate(item3DModel);
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
